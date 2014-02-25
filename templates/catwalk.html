@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)http://www.teaching-materials.org/storage/catwalk.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>Cat Walk</title>
+ 
+ 
+ <script type=text/javascript async="" src="{{url_for('static', filename='ga.js') }}"></script>
+<script type=text/javascript async="" src="{{url_for('static', filename='gt.js') }}"></script>
+
+ <body>
+  
+  <!--<img style="position: absolute; left: 920px;" src="./Cat Walk_files/cat.gif">-->
+  <img style="position: absolute; left: 920px;" src = "{{ url_for('static', filename='cat.gif') }}">
+
+  <script>
+ 
+//localStorage.clear();
+  var img = document.getElementsByTagName('img')[0];
+  
+   var audioElement = document.createElement('audio');
+audioElement.setAttribute('src', 'file.wav');
+//audioElement.volume=100;
+img.onmouseover = function(){
+audioElement.play();}
+  
+  
+  
+  
+if (!localStorage.getItem("location-left"))
+img.style.left = '0px';
+else 
+img.style.left = localStorage.getItem("location-left") + 'px';
+
+
+var walkForwards;// = true;
+
+if (localStorage.getItem("direction-forward") == false )
+walkForwards = false;//localStorage.getItem("direction-forward");
+else 
+walkForwards = true;
+
+function catWalk() {
+  //var currentLeft;
+  //if (!localStorage.getItem("location-left")) 
+  var currentLeft = parseInt(img.style.left);
+  //} else
+  //currentLeft = localStorage.getItem("location-left");
+  
+  if ((currentLeft > (window.innerWidth-img.width))) {
+    walkForwards = false;
+  }
+  if ((currentLeft <= 0)) {
+    walkForwards = true;
+  }
+ 
+  if (walkForwards) {
+    img.style.left = (currentLeft + 10) + 'px';
+  } else {
+    img.style.left = (currentLeft - 10) + 'px';
+  }
+localStorage.setItem("location-left", currentLeft);
+localStorage.setItem("direction-forward", walkForwards);  
+  }
+window.setInterval(catWalk, 50);
+  </script>
+
+ 
+<div id="LCS_FE1DEEEA_DB6D_44b8_83F0_34FC0F9D1052_communicationDiv" lcs_fe1deeea_db6d_44b8_83f0_34fc0f9d1052_valuename="WSG_status" lcs_fe1deeea_db6d_44b8_83f0_34fc0f9d1052_valueresult="inactive|||8641393132152710"></div></body></html>
